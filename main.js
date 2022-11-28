@@ -1,33 +1,34 @@
 let shop = document.getElementById('shop')
 
-let shopItemsData = [{
-    id: 1,
+let shopItemsData = [
+  {
+    id: "jfhgbvnscs",
     name: "Casual shirts",
     price: 45,
     desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-    img: "img-1.jpg"
-},
-{
-    id: 2,
+    img: "images/img-1.jpg",
+  },
+  {
+    id: "ioytrhndcv",
     name: "Office Shirt",
     price: 100,
     desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-    img: "img-2.jpg"
-},
-{
-    id: 3,
+    img: "images/img-2.jpg",
+  },
+  {
+    id: "wuefbncxbsn",
     name: "T-Shirt",
     price: 25,
     desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-    img: "img-3.jpg"
-},
-{
-    id: 4,
+    img: "images/img-3.jpg",
+  },
+  {
+    id:  "thyfhcbcv",
     name: "Mens Suit",
     price: 300,
     desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-    img: "img-4.jpg"
-}
+    img: "images/img-4.jpg",
+  },
 ];
 // console.log(shop);
 let basket = [{
@@ -54,15 +55,16 @@ let generateShop = () => {
                 </div>
               </div>  
         `;      
-    }).join(""));
+    })
+    .join(""));
 };
 
 generateShop();
 
 
-let increment = (id) =>{
+let increment = (id) => {
     let selectedItem = id;
-    let search = basket.find((x)=> x.id === selectedItem.id);
+    let search = basket.find((x) => x.id === selectedItem.id);
 
     if(search === undefined){
         basket.push({
@@ -74,13 +76,13 @@ let increment = (id) =>{
     }
    
 
-    console.log(basket);
-    update();
+    //console.log(basket);
+    update(selectedItem.id);
 };
 
-let decrement = (id) =>{
+let decrement = (id) => {
     let selectedItem = id;
-    let search = basket.find((x)=> x.id === selectedItem.id);
+    let search = basket.find((x) => x.id === selectedItem.id);
 
     if(search.item === 0) return;
      else {
@@ -88,10 +90,12 @@ let decrement = (id) =>{
     }
    
 
-    console.log(basket);
-    update();
+    //console.log(basket);
+    update(selectedItem.id);
 };
 
-let update = () =>{
-   console.log("the update function is running"); 
+let update = (id) =>{
+    let search = basket.find((x) => x.id === id);
+   console.log(search.item); 
+   document.getElementById(id).innerHTML = search.item;
 };
