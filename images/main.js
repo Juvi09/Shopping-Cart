@@ -1,56 +1,97 @@
 let shop = document.getElementById('shop')
 
 let shopItemsData = [{
-    id:"jjkd",
+    id: 1,
     name: "Casual shirts",
     price: 45,
     desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
     img: "img-1.jpg"
 },
 {
-    id:"jjkdhja",
+    id: 2,
     name: "Office Shirt",
     price: 100,
     desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
     img: "img-2.jpg"
 },
 {
-    id:"ajsjjjkd",
+    id: 3,
     name: "T-Shirt",
     price: 25,
     desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
     img: "img-3.jpg"
 },
 {
-    id:"jieajkd",
+    id: 4,
     name: "Mens Suit",
     price: 300,
     desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
     img: "img-4.jpg"
 }
 ];
-console.log(shop);
+// console.log(shop);
+let basket = [{
+    
+}];
 
 let generateShop = () => {
     return (shop.innerHTML = shopItemsData.map((x) => {
+        let {id, name, price, desc, img} = x;
         return `
-        <div class="item">
-                <img width="220" src="img-1.jpg" alt=""> 
+        <div id=product-id-${id} class="item">
+                <img width="220" src=${img} alt=""> 
                 <div class="details">
-                    <h3>Casual Shirt</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                    <h3>${name}</h3>
+                    <p>${desc}</p>
                     <div class="price-quantity">
-                        <h4>$ 45</h4>
+                        <h4>$ ${price}</h4>
                         <div class="buttons">
-                            <i class="bi bi-dash-lg"></i>
-                            <div class="quantity">0</div>
-                            <i class="bi bi-plus-lg"></i>
+                            <i onclick="decrement(${id})" class="bi bi-dash-lg"></i>
+                            <div id=${id}class="quantity">0</div>
+                            <i onclick="increment(${id})" class="bi bi-plus-lg"></i>
                         </div>
                     </div>
                 </div>
               </div>  
-        `      
-    }));
-}
+        `;      
+    }).join(""));
+};
 
 generateShop();
+
+
+let increment = (id) =>{
+    let selectedItem = id;
+    let search = basket.find((x)=> x.id === selectedItem.id);
+
+    if(search === undefined){
+        basket.push({
+            id: selectedItem.id,
+            item: 1,
+        });
+    } else {
+        search.item += 1;
+    }
+   
+
+    console.log(basket);
+    update();
+};
+
+let decrement = (id) =>{
+    let selectedItem = id;
+    let search = basket.find((x)=> x.id === selectedItem.id);
+
+    if(search.item === 0) return;
+     else {
+        search.item -= 1;
+    }
+   
+
+    console.log(basket);
+    update();
+};
+
+let update = () =>{
+   console.log("the update function is running"); 
+};
